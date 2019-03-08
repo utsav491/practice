@@ -38,6 +38,39 @@ sales_and_managers = pd.merge(left =  sales , right = managers , right_on =["bra
 print(sales_and_managers)
 
 
+
+
+
+
+
+
+
+austin = pd.DataFrame({"date" : ["2018 -01-01" ,"2018 - 01 -15", "2018 -09 -01" ] , 
+                       "weather": ["Rainy", "Rainy", "Cloudy"]
+                       })
+
+houston = pd.DataFrame({"date" : ["2018 -01-01" ,"2018 - 03 -05", "2018 -10 -21" ] , 
+                       "weather": ["Rainy", "Cloudy", "Cloudy"]
+                       })
+    
+# Perform the first ordered merge: tx_weather
+tx_weather = pd.merge_ordered(austin ,houston)
+
+# Print tx_weather
+print(tx_weather)
+
+# Perform the second ordered merge: tx_weather_suff
+tx_weather_suff = pd.merge_ordered(austin ,houston ,on ="date" ,suffixes = ["_aus", "_hus"])
+
+# Print tx_weather_suff
+print(tx_weather_suff)
+
+# Perform the third ordered merge: tx_weather_ffill
+tx_weather_ffill = pd.merge_ordered(austin, houston , on ="date", suffixes = ["_aus", "_hus"], fill_method="ffill")
+
+# Print tx_weather_ffill
+print(tx_weather_ffill)
+
 # Perform the first merge: merge_default
 merge_default = pd.merge(sales_and_managers , revenue_and_sales)
 
